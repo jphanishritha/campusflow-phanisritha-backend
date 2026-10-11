@@ -116,10 +116,10 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOriginPatterns(List.of(
-                "https://campusflow-mahesh-frontend.onrender.com",
-                "http://localhost:5173"
-        ));
+        config.setAllowedOriginPatterns(Arrays.stream(allowedOrigins.split(","))
+                .map(String::trim)
+                .filter(origin -> !origin.isEmpty())
+                .toList());
 
         config.setAllowedMethods(List.of(
                 "GET",
